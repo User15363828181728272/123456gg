@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XTE ID | X-Tech Engineering Laboratory by Defandryan</title>
+    <meta name="description" content="XTE ID (X-Tech Engineering) adalah laboratorium riset teknologi oleh Defandryan. Fokus pada AI Engineering, Fullstack Development, dan Sistem Digital Sperada UPT SMPN 18 Gresik.">
+    <meta name="keywords" content="XTE ID, X-Tech Engineering, Defandryan, Sperada Digital, AI Engineer Indonesia, Fullstack Developer Gresik, UPT SMPN 18 Gresik, Lab Teknologi SMP">
+    <meta name="author" content="Defandryan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://xte.web.id">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xte.web.id/">
+    <meta property="og:title" content="XTE ID | X-Tech Engineering Laboratory">
+    <meta property="og:description" content="Eksplorasi teknologi masa depan bersama XTE ID oleh Defandryan. Arsitektur sistem digital dan riset AI.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- JSON-LD Structured Data for Google Indexing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "XTE ID",
+      "alternateName": "X-Tech Engineering Laboratory",
+      "url": "https://xte.web.id",
+      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
+      "description": "XTE ID adalah laboratorium riset teknologi oleh Defandryan yang berfokus pada AI Engineering dan Fullstack Development.",
+      "author": {
+        "@type": "Person",
+        "name": "Defandryan"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gresik",
+        "addressCountry": "ID"
+      },
+      "sameAs": [
+        "https://instagram.com/depann15_",
+        "https://tiktok.com/@depstore_11"
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #ffffff;
+            --bg: #000000;
+            --fluid-8xl: clamp(3rem, 12vw, 9rem);
+            --fluid-5xl: clamp(2rem, 6vw, 4rem);
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: #ffffff;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            overscroll-behavior-y: none;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .glass-card { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        
+        @media (hover: hover) {
+            .glass-card:hover {
+                transform: translateY(-5px);
+                background: rgba(20, 20, 20, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #4b5563 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: clamp(30px, 5vw, 50px) clamp(30px, 5vw, 50px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+        
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03), transparent);
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+
+        .fluid-8xl { font-size: var(--fluid-8xl); }
+        .fluid-5xl { font-size: var(--fluid-5xl); }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 10px; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="grid-bg">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
