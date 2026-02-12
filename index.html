@@ -38,8 +38,8 @@
         "addressCountry": "ID"
       },
       "sameAs": [
-        "https://instagram.com/depann15_",
-        "https://tiktok.com/@depstore_11"
+        "https://instagram.com/depann15",
+        "https://tiktok.com/@depstore11"
       ]
     }
     </script>
@@ -52,8 +52,8 @@
         :root {
             --accent: #ffffff;
             --bg: #000000;
-            --fluid-8xl: clamp(3rem, 12vw, 9rem);
-            --fluid-5xl: clamp(2rem, 6vw, 4rem);
+            --fluid-8xl: clamp(2.5rem, 10vw, 9rem);
+            --fluid-5xl: clamp(1.75rem, 5vw, 4rem);
         }
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -63,6 +63,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             overscroll-behavior-y: none;
+            touch-action: manipulation;
         }
         .mono { font-family: 'JetBrains Mono', monospace; }
         
@@ -71,12 +72,13 @@
             backdrop-filter: blur(16px); 
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform, background, border;
         }
         
         @media (hover: hover) {
             .glass-card:hover {
-                transform: translateY(-5px);
+                transform: translateY(-5px) translateZ(0);
                 background: rgba(20, 20, 20, 0.6);
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
@@ -97,10 +99,10 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(15px) translateZ(0); }
+            to { opacity: 1; transform: translateY(0) translateZ(0); }
         }
-        .fade-in { animation: fadeIn 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
         
         @keyframes scanline {
             0% { transform: translateY(-100%); }
@@ -110,8 +112,8 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03), transparent);
-            animation: scanline 10s linear infinite;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.02), transparent);
+            animation: scanline 8s linear infinite;
             pointer-events: none;
         }
 
