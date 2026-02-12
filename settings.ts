@@ -42,7 +42,7 @@ export const SETTINGS = {
     },
     {
       title: "Neural Prompt Lab",
-      url: "google.com",
+      url: "#",
       isInternal: false,
       desc: "Internal benchmarking tool for evaluating AI model responses and system efficiency.",
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80"
@@ -50,11 +50,11 @@ export const SETTINGS = {
   ],
   contact: {
     whatsapp: "6288242449961",
-    instagram: "depann15_",
-    tiktok: "depstore_11",
-    email: "depstoreku@gmail.com"
+    instagram: "depann15",
+    tiktok: "depstore11",
+    email: "contact@xte.web.id"
   },
-  className: "9 E",
+  className: "9-E",
   schoolName: "UPT SMPN 18 Gresik",
   academicYear: "2024/2025",
   schoolPhoto: "https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=800&q=80",
@@ -74,7 +74,7 @@ export const SETTINGS = {
     {
       id: 1,
       name: "Defandryan",
-      parent: "Atak",
+      parent: "Ahmad",
       quote: "Technology is only limited by our imagination and the quality of our logic.",
       photo: "https://files.catbox.moe/httwuv.jpg",
       isDev: true
@@ -93,8 +93,8 @@ export const DEV_SETTINGS = {
   roles: ["Founder of XTE ID", "AI Engineer", "Fullstack Developer"],
   socials: {
     links: {
-      instagram: "https://instagram.com/depann15_",
-      tiktok: "https://tiktok.com/@depstore_11",
+      instagram: "https://instagram.com/depann15",
+      tiktok: "https://tiktok.com/@depstore11",
       whatsapp: "https://wa.me/6288242449961"
     }
   },
