@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SETTINGS } from '../settings';
-import { Image, Clock, Target, Terminal, Shield, Activity, ChevronRight, ArrowRight } from 'lucide-react';
+import { Image, Clock, Target, Terminal, Shield, Activity, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
