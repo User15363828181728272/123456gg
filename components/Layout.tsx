@@ -1,115 +1,140 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Instagram, MessageSquare, Terminal, Code2, Cpu, LayoutGrid, UserCircle, Share2 } from 'lucide-react';
-import { SETTINGS, DEV_SETTINGS } from '../settings';
+import { Menu, X, Home, Grid, Users, Image, MessageSquare, Info, ShieldCheck, ExternalLink } from 'lucide-react';
+import { SETTINGS } from '../settings';
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { pathname } = useLocation();
+interface LayoutProps {
+  children: React.ReactNode;
+}
 
-  const navItems = [
-    { name: 'Home', path: '/', icon: LayoutGrid },
-    { name: 'Projects', path: '/projects', icon: Cpu },
-    { name: 'Articles', path: '/artikel', icon: Terminal },
-    { name: 'Sperada', path: '/dashboard', icon: Code2 },
-    { name: 'Architect', path: '/owner', icon: UserCircle },
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const navLinks = [
+    { name: 'Beranda', path: '/', icon: Home },
+    { name: 'Dashboard', path: '/dashboard', icon: Grid },
+    { name: 'Struktur', path: '/struktur', icon: Users },
+    { name: 'Siswa', path: '/data/siswa', icon: Info },
+    { name: 'Foto Kelas', path: '/foto/kelas', icon: Image },
+    { name: 'Foto Aib', path: '/foto/aib', icon: ShieldCheck },
+    { name: 'Orang Tua', path: '/nama/orangtua', icon: Users },
+    { name: 'Kata-kata', path: '/kenangan/kata-kata', icon: MessageSquare },
+    { name: 'Kenangan', path: '/kenangan/foto', icon: Image },
   ];
 
-  return (
-    <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black flex flex-col overflow-x-hidden">
-      {/* Top Header */}
-      <nav className="fixed top-0 w-full z-[100] border-b border-white/[0.03] bg-black/40 backdrop-blur-xl h-20">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 h-full flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2 md:gap-3 group">
-            <div className="w-9 h-9 md:w-10 md:h-10 bg-white rounded-xl flex items-center justify-center text-black font-black text-lg md:text-xl transition-all group-hover:rotate-12 group-hover:scale-110 shadow-[0_0_25px_rgba(255,255,255,0.3)]">
-              X
-            </div>
-            <div className="flex flex-col">
-              <span className="text-lg md:text-xl font-black tracking-tighter leading-none uppercase">{SETTINGS.brandName}</span>
-              <span className="text-[8px] text-zinc-500 font-bold tracking-[0.25em] uppercase hidden sm:block italic">Eng Lab v2</span>
-            </div>
-          </Link>
+  const isActive = (path: string) => location.pathname === path;
 
-          <div className="flex items-center gap-3">
-            <a 
-              href={DEV_SETTINGS.socials.links.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 md:px-6 py-2 md:py-2.5 bg-zinc-900 border border-zinc-800 text-white rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 flex items-center gap-2"
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 nav-glass border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <Link to="/" className="flex items-center gap-3">
+              <img src={SETTINGS.classLogo} alt="Logo" className="h-10 w-10 rounded-full object-cover border-2 border-blue-500 shadow-sm" />
+              <div className="flex flex-col">
+                <span className="font-bold text-gray-900 leading-tight">Sperada {SETTINGS.className}</span>
+                <span className="text-[10px] text-gray-400 font-bold tracking-wider uppercase">{SETTINGS.schoolName}</span>
+              </div>
+            </Link>
+
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center space-x-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                    isActive(link.path)
+                      ? 'bg-blue-600 text-white shadow-md'
+                      : 'text-gray-500 hover:text-blue-600 hover:bg-gray-50'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden p-2 rounded-lg text-gray-500 hover:text-blue-600 hover:bg-gray-100 transition-colors"
             >
-              <span className="hidden xs:inline">Connect</span> <Share2 size={12} />
-            </a>
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Nav */}
+        {isOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-100 shadow-2xl animate-in slide-in-from-top duration-300">
+            <div className="px-4 pt-2 pb-6 space-y-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center gap-4 px-4 py-3 rounded-xl text-base font-bold transition-colors ${
+                    isActive(link.path)
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-600 hover:bg-gray-50'
+                  }`}
+                >
+                  <link.icon size={20} className={isActive(link.path) ? 'text-blue-600' : 'text-gray-400'} />
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
-      {/* Main Content Area */}
-      <div className="flex flex-col flex-grow">
-        <main className="flex-grow pt-20 pb-28 md:pb-40">
-          {children}
-        </main>
+      <main className="flex-grow">
+        {children}
+      </main>
 
-        <footer className="py-20 md:py-40 border-t border-zinc-900 bg-zinc-950/20 mb-20 md:mb-0">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24">
-            <div className="lg:col-span-2">
-              <h2 className="text-4xl font-black mb-8 tracking-tighter italic uppercase">{SETTINGS.brandName}<span className="text-zinc-700">.</span></h2>
-              <p className="text-zinc-500 text-lg leading-relaxed max-w-md font-medium">
-                X-Tech Engineering Laboratory (XTE ID). Solo infrastructure deployment and digital research node by {DEV_SETTINGS.name}.
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-100 pt-16 pb-10 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center gap-4 mb-6">
+                <img src={SETTINGS.schoolLogo} alt="School Logo" className="h-12 w-auto" />
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 tracking-tight">{SETTINGS.schoolName}</h3>
+                  <p className="text-sm text-gray-400 font-medium tracking-wide uppercase">{SETTINGS.academicYear}</p>
+                </div>
+              </div>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+                Wadah digital kebanggaan kelas {SETTINGS.className} Sperada. Tempat menyimpan setiap tawa, perjuangan, dan cerita kita bersama.
               </p>
             </div>
             <div>
-              <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-700 mb-8 mono">Archived Nodes</h3>
-              <ul className="space-y-4 text-sm font-bold text-zinc-500">
-                <li><Link to="/projects" className="hover:text-white transition-colors uppercase tracking-widest">Tech Archive</Link></li>
-                <li><Link to="/artikel" className="hover:text-white transition-colors uppercase tracking-widest">Transmissions</Link></li>
-                <li><Link to="/dashboard" className="hover:text-white transition-colors uppercase tracking-widest">Sperada Node</Link></li>
-                <li><Link to="/owner" className="hover:text-white transition-colors uppercase tracking-widest">Architect Bio</Link></li>
+              <h4 className="font-bold text-gray-900 mb-6 uppercase text-xs tracking-widest">Akses Cepat</h4>
+              <ul className="space-y-4 text-sm font-medium text-gray-500">
+                <li><Link to="/dashboard" className="hover:text-blue-600 transition-colors">Dashboard</Link></li>
+                <li><Link to="/struktur" className="hover:text-blue-600 transition-colors">Struktur Organisasi</Link></li>
+                <li><Link to="/data/siswa" className="hover:text-blue-600 transition-colors">Daftar Siswa</Link></li>
+                <li><Link to="/foto/kelas" className="hover:text-blue-600 transition-colors">Galeri Foto</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-700 mb-8 mono">Transmission</h3>
-              <div className="flex gap-4">
-                <a href={DEV_SETTINGS.socials.links.instagram} className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-zinc-500 hover:text-white transition-all"><Instagram size={20} /></a>
-                <a href={DEV_SETTINGS.socials.links.whatsapp} className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-zinc-500 hover:text-white transition-all"><MessageSquare size={20} /></a>
-                <a href={`mailto:${SETTINGS.contact.email}`} className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-zinc-500 hover:text-white transition-all"><Terminal size={20} /></a>
-              </div>
+              <h4 className="font-bold text-gray-900 mb-6 uppercase text-xs tracking-widest">Tautan Luar</h4>
+              <ul className="space-y-4 text-sm font-medium text-gray-500">
+                <li><a href={SETTINGS.externalLinks.school} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-blue-600"><ExternalLink size={14} /> Website Sekolah</a></li>
+                <li><a href={SETTINGS.externalLinks.xte} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-blue-600"><ExternalLink size={14} /> Official Owner</a></li>
+                <li><a href={SETTINGS.externalLinks.depstore} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-blue-600"><ExternalLink size={14} /> Depstore ID</a></li>
+              </ul>
             </div>
           </div>
-          <div className="max-w-7xl mx-auto px-6 pt-12 mt-12 border-t border-zinc-900/50 flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
-            <p className="text-zinc-800 text-[9px] font-black uppercase tracking-[0.4em] mono">© 2025 {SETTINGS.brandName.toUpperCase()} // DESIGNED BY {DEV_SETTINGS.name.toUpperCase()}</p>
-            <div className="flex items-center gap-4 bg-zinc-900/30 px-5 py-2.5 rounded-full border border-zinc-900">
-               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_15px_rgba(34,197,94,0.6)]"></span>
-               <p className="text-zinc-500 text-[9px] font-black uppercase tracking-[0.3em] mono">Neural Link Stable</p>
-            </div>
+          <div className="pt-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+            <p>&copy; {new Date().getFullYear()} {SETTINGS.className} Sperada Family.</p>
+            <p className="font-medium">Crafted with ❤️ by <a href={SETTINGS.developer.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{SETTINGS.developer.name}</a></p>
           </div>
-        </footer>
-      </div>
-
-      {/* FLOATING BOTTOM DOCK NAVIGATION - Optimized for smooth mobile interaction */}
-      <div className="fixed bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 z-[200] w-auto max-w-[95%] px-2">
-        <div className="bg-zinc-900/60 backdrop-blur-2xl border border-white/10 p-1.5 rounded-[2.5rem] flex items-center gap-0.5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] will-change-transform translate-z-0">
-          {navItems.map((item) => {
-            const isActive = pathname === item.path;
-            return (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`relative flex items-center justify-center gap-2.5 px-4 md:px-8 py-3.5 md:py-4 rounded-[2rem] transition-all duration-500 group overflow-hidden ${isActive ? 'bg-white text-black shadow-[0_0_30px_rgba(255,255,255,0.25)] scale-105' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/5'}`}
-              >
-                <item.icon size={18} strokeWidth={isActive ? 2.5 : 2} className={`transition-transform duration-500 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
-                {/* On mobile, only show label if active or on desktop hover */}
-                <span className={`text-[9px] font-black uppercase tracking-widest transition-all duration-500 
-                  ${isActive ? 'max-w-[100px] opacity-100 ml-1' : 'max-w-0 opacity-0 overflow-hidden md:group-hover:max-w-[100px] md:group-hover:opacity-100 md:group-hover:ml-1'}`}>
-                  {item.name}
-                </span>
-                {isActive && (
-                  <div className="absolute inset-0 bg-white/10 animate-pulse pointer-events-none"></div>
-                )}
-              </Link>
-            );
-          })}
         </div>
-      </div>
+      </footer>
     </div>
   );
 };
